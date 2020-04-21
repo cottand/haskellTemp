@@ -8,16 +8,13 @@ letters xs = [take n xs | n <- [0 .. length xs]]
 dists :: String -> String -> [String]
 dists xs [] = reverse $ letters xs
 dists [] xs = letters xs
-dists x'@(x:xs) y'@(y:ys) = minimumBy length [x' : dists xs y', dists x' ys ++ [y'], ds']
+dists xs'@(x:xs) ys'@(y:ys) = minimumBy length [xs' : dists xs ys', dists xs' ys ++ [ys'], ds']
   where
     ds = dists xs ys
-    ds' =
-      if x == y
-        then map (x :) ds
-        else x' : map (y :) ds
-    minimumBy :: (a -> Int) -> [a] -> a
+    ds'
+      | x == y = map (x :) ds
+      | otherwise = xs' : map (y :) ds
     minimumBy _ [x] = x
-    minimumBy f (x:y:xs) =
-      if f x > f y
-        then minimumBy f (y : xs)
-        else minimumBy f (x : xs)
+    minimumBy f (x:y:xs)
+      | f x > f y = minimumBy f (y : xs)
+      | otherwise = minimumBy f (x : xs)
