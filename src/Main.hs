@@ -18,3 +18,12 @@ dists xs'@(x:xs) ys'@(y:ys) = minimumBy length [xs' : dists xs ys', dists xs' ys
     minimumBy f (x:y:xs)
       | f x > f y = minimumBy f (y : xs)
       | otherwise = minimumBy f (x : xs)
+
+
+tabulate :: Ix i => (i,i) -> (i -> a) -> Array i a
+tabulate (u,v) f = array (u,v) [ (i, f i) | i <- range (u, v)]
+
+fib:: Int -> Integer
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n-1) + fib (n-2)
