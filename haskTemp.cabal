@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f65955b82cca6babafbff4798a6bc528982aeb4b3c432cadbc4c500c377306c2
+-- hash: 71f2300aaee168e14eff60a4cbbfc9231682af9024d1ae0c052b24199fd43e8e
 
 name:           haskTemp
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
   exposed-modules:
       Lib
       Main
+      Submission
   other-modules:
       Paths_haskTemp
   hs-source-dirs:

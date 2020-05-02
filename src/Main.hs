@@ -1,5 +1,9 @@
 module Main where
 
+import GHC.Arr (Array, (!), array)
+
+import Data.Ix (Ix, range)
+
 main :: IO ()
 main = putStr $ show (dists "hello" "bhell")
 
@@ -19,11 +23,21 @@ dists xs'@(x:xs) ys'@(y:ys) = minimumBy length [xs' : dists xs ys', dists xs' ys
       | f x > f y = minimumBy f (y : xs)
       | otherwise = minimumBy f (x : xs)
 
+tabulate :: Ix i => (i, i) -> (i -> a) -> Array i a
+tabulate (u, v) f = array (u, v) [(i, f i) | i <- range (u, v)]
 
-tabulate :: Ix i => (i,i) -> (i -> a) -> Array i a
-tabulate (u,v) f = array (u,v) [ (i, f i) | i <- range (u, v)]
-
-fib:: Int -> Integer
+fib :: Int -> Integer
 fib 0 = 0
 fib 1 = 1
-fib n = fib (n-1) + fib (n-2)
+fib n = fib (n - 1) + fib (n - 2)
+
+fibt :: Int -> Integer
+fibt n = t ! n
+  where
+    t = tabulate (0, n) f
+    f 0 = 0
+    f 1 = 1
+    f m = t ! (m - 1) + t ! (m - 2)
+    
+    
+    
