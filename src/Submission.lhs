@@ -179,7 +179,7 @@ knapsack :: (Ord weight, Num weight, Ord value, Num value) =>
 knapsack wvs c = maximum 0 [ v + knapsack wvs (c - w) | (_,w,v) <- wvs , w <= c ]
 
 maximum :: Ord a => a -> [a] -> a
-maximum x xs = foldr max x xs
+maximum = foldr max
 \end{code}
 \end{comment}
 
